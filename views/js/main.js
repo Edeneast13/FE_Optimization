@@ -502,6 +502,8 @@ function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
 
+  //moved this functionality outside of for loop to reduce repeating workload 
+  //query was being repeated in for loop 
   var items = document.querySelectorAll('.mover');
   var body = (document.body.scrollTop/1250);
   var calc = [Math.sin(body + 0),
@@ -510,6 +512,7 @@ function updatePositions() {
                 Math.sin(body + 3),
                 Math.sin(body + 4)];
   
+  //math redundancy removed
   for (var i = 0; i < items.length; i++) {
     var phase = calc[i%5];
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
